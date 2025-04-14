@@ -41,11 +41,11 @@ public class RestConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/token").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/hello-admin").hasAuthority("SCOPE_ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
-                .csrf((csrf) -> csrf.ignoringRequestMatchers("/token"))
+                .csrf((csrf) -> csrf.ignoringRequestMatchers("/login"))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling((exceptions) -> exceptions

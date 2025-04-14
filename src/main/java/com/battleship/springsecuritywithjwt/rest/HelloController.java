@@ -10,7 +10,7 @@ public class HelloController {
 
     @GetMapping("hello")
     public ResponseEntity<?> hello(Authentication authentication) {
-        return ResponseEntity.ok("hello: " + authentication.getName() + " "  + authentication.getAuthorities());
+        return ResponseEntity.ok("hello user: " + authentication.getName() + " "  + authentication.getAuthorities());
     }
 
     @GetMapping("hello-admin")

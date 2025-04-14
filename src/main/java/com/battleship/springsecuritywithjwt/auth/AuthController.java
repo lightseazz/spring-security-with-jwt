@@ -1,8 +1,9 @@
-package com.battleship.springsecuritywithjwt.rest;
+package com.battleship.springsecuritywithjwt.auth;
 
 import java.time.Instant;
 import java.util.stream.Collectors;
 
+import com.battleship.springsecuritywithjwt.dto.LoginRequestDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,22 +20,18 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 @RestController
-public class TokenController {
+public class AuthController {
 
     private final JwtEncoder encoder;
     private final AuthenticationManager authenticationManager;
 
-    public static record LoginRequest(String username, String password) {
-    }
-
-
-    public TokenController(JwtEncoder encoder, AuthenticationManager authenticationManager) {
+    public AuthController(JwtEncoder encoder, AuthenticationManager authenticationManager) {
         this.encoder = encoder;
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/token")
-    public String token(@RequestBody LoginRequest loginRequest) {
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequestDTO loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
