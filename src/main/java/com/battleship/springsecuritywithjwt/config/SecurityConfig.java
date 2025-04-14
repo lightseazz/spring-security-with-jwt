@@ -1,4 +1,4 @@
-package com.battleship.springsecuritywithjwt;
+package com.battleship.springsecuritywithjwt.config;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -29,13 +29,13 @@ import org.springframework.security.oauth2.server.resource.web.access.BearerToke
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class RestConfig {
+public class SecurityConfig {
 
     @Value("${jwt.public.key}")
-    RSAPublicKey key;
+    RSAPublicKey rsaPublicKey;
 
     @Value("${jwt.private.key}")
-    RSAPrivateKey priv;
+    RSAPrivateKey rsaPrivateKey;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -68,12 +68,12 @@ public class RestConfig {
 
     @Bean
     JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.key).build();
+        return NimbusJwtDecoder.withPublicKey(this.rsaPublicKey).build();
     }
 
     @Bean
     JwtEncoder jwtEncoder() {
-        JWK jwk = new RSAKey.Builder(this.key).privateKey(this.priv).build();
+        JWK jwk = new RSAKey.Builder(this.rsaPublicKey).privateKey(this.rsaPrivateKey).build();
         JWKSource<SecurityContext> jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }
