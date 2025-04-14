@@ -38,7 +38,7 @@ public class AuthController {
             );
 
             Instant now = Instant.now();
-            long expiry = 36000L;
+            int expiry = 60 * 5;   // expire in 5 minutes
             String scope = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.joining(" "));
