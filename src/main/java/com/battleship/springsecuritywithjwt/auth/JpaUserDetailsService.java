@@ -1,4 +1,4 @@
-package com.battleship.springsecuritywithjwt.service;
+package com.battleship.springsecuritywithjwt.auth;
 
 import com.battleship.springsecuritywithjwt.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -3,7 +3,6 @@ package com.battleship.springsecuritywithjwt.auth;
 import java.time.Instant;
 import java.util.stream.Collectors;
 
-import com.battleship.springsecuritywithjwt.dto.LoginRequestDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,7 +37,7 @@ public class AuthController {
             );
 
             Instant now = Instant.now();
-            int expiry = 60 * 5;   // expire in 5 minutes
+            int expiry = 60 * 15;   // expire in 15 minutes
             String scope = authentication.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.joining(" "));

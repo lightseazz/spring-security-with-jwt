@@ -1,4 +1,4 @@
-package com.battleship.springsecuritywithjwt.config;
+package com.battleship.springsecuritywithjwt.auth;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
